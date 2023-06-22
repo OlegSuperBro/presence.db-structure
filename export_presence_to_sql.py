@@ -109,13 +109,7 @@ if __name__ == "__main__":
                         logitude REAL,
                         latitude REAL,
                         rank INTEGER,
-                        byte3 TEXT,
-                        byte4 TEXT,
-                        byte5 TEXT,
-                        byte6 TEXT,
-                        byte7 TEXT,
-                        byte8 TEXT,
-                        same_bytes TEXT
+                        timestamp DATE
                     );""")
     for _ in range(read_uint(file)):
         _id = read_uint(file)
@@ -137,17 +131,10 @@ if __name__ == "__main__":
 
         rank = read_uint(file)
 
-        byte3 = hex(read_ubyte(file))[2:]
-        byte4 = hex(read_ubyte(file))[2:]
-        byte5 = hex(read_ubyte(file))[2:]
-        byte6 = hex(read_ubyte(file))[2:]
-        byte7 = hex(read_ubyte(file))[2:]
-        byte8 = hex(read_ubyte(file))[2:]
+        timestamp = read_datetime(file)
 
-        same_bytes = hex(read_ubyte(file))[2:] + hex(read_ubyte(file))[2:]
-
-        conn.execute("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        conn.execute("INSERT INTO users VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                      (_id, username, byte1, byte2, player, global_moderator, supporter, gamemode,
-                      logitude, latitude, rank, byte3, byte4, byte5, byte6, byte7, byte8, same_bytes))
+                      logitude, latitude, rank, timestamp.strftime("%d/%m/%Y %H:%M:%S")))
     conn.commit()
     conn.close()

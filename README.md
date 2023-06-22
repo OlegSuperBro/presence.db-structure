@@ -30,13 +30,7 @@ First of all, you should check [data types](https://github.com/ppy/osu/wiki/Lega
 |Float|Longitude of player|
 |Float|Latitude of player|
 |Int|Player rank in current gamemode|
-|???|???|
-|???|???|
-|???|???|
-|???|???|
-|???|???|
-|???|???|
-|Short| It's always same. Maybe means end of user record|
+|Long|Timestamp (when last time player was checked?)|
 
 ## If you want help
 
